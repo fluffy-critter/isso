@@ -80,7 +80,11 @@ class Disqus(object):
 
     def insert(self, thread, posts):
 
-        path = urlparse(thread.find('%slink' % Disqus.ns).text).path
+        named_id = thread.find(Disqus.ns + 'id').text
+        if named_id:
+            path = named_id
+        else:
+            path = urlparse(thread.find('%slink' % Disqus.ns).text).path
         remap = dict()
 
         if path not in self.db.threads:
