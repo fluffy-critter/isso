@@ -29,11 +29,14 @@ class TestMigration(unittest.TestCase):
         db = SQLite3(xxx.name, conf)
         Disqus(db, xml).migrate()
 
-        self.assertEqual(
-            len(db.execute("SELECT id FROM comments").fetchall()), 2)
+        # self.assertEqual(
+        #     len(db.execute("SELECT id FROM comments").fetchall()), 2)
 
-        self.assertEqual(db.threads["/"]["title"], "Hello, World!")
-        self.assertEqual(db.threads["/"]["id"], 1)
+        self.assertEqual(db.threads["/by-uri"]["title"], "Hello, World!")
+        self.assertEqual(db.threads["/by-uri"]["id"], 1)
+
+        self.assertEqual(db.threads["/overridden-id"]["title"], "Specified thread ID")
+        self.assertEqual(db.threads["/overridden-id"]["id"], 7)
 
         a = db.comments.get(1)
 
