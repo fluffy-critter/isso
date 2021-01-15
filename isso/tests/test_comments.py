@@ -240,7 +240,6 @@ class TestComments(unittest.TestCase):
         r = self.get('/id/1?plain=1')
         self.assertEqual(r.status_code, 403)
 
-
     def testDeleteWithReference(self):
 
         client = JSONClient(self.app, Response)

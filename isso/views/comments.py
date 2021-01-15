@@ -960,6 +960,7 @@ class API(object):
     @apiSuccessExample Counts of 5 threads:
         [2, 18, 4, 0, 3]
     """
+
     def counts(self, environ, request):
 
         data = request.get_json()
